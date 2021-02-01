@@ -57,16 +57,9 @@ meta: {
 
 此字段表示用户身份，详细如下
 
-- 0 游客
-- 1 普通用户
-- 2-4 保留
-- 5 学生
-- 6 家长（保留）
-- 7-10 保留
-- 11 老师
-- 12 教研员（保留）
-- 13 名师（保留）
-- 14-20 保留
+- 0 用户1 
+- 1 用户2
+- 2 用户3
 
 ## 关于父子路由验证
 
@@ -74,9 +67,9 @@ meta: {
 
 ```javascript
 {
-  path: '/notices',
-  // name: 'Notices',
-  component: Notices,
+  path: '/test',
+  // name: 'test',
+  component: test,
   /**
    * @description
    *  权限设定，父路由可以统一设置
@@ -84,23 +77,23 @@ meta: {
    *  当子路由设置时，以子路由为主
    */
   meta: {
-    auth: 11
+    auth: 1
   },
   children: [
     {
-      path: 'list/:type',
-      name: 'NoticesList',
-      component: NoticesList
-      // 此路由会用 `auth:13` 来验证。
+      path: 'child',
+      name: 'child',
+      component: child
+      // 此路由会用 `auth:2` 来验证。
       meta: {
-        auth: 13
+        auth: 2
       }
     },
     {
-      // 此路由会用 `auth:11` 来验证。
-      path: 'item/:id',
-      name: 'NoticesItem',
-      component: NoticesItem
+      // 此路由会用 `auth:1` 来验证。
+      path: 'other',
+      name: 'other',
+      component: other
     },
     ...
   ]
